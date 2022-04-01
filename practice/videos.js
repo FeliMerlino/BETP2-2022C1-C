@@ -29,3 +29,21 @@ const str = `<ul>
 <li data-time="5:59">Redux Video</li>
 <li data-time="3:31">Flexbox Video</li>
 </ul>`;
+let tpoTotal = 0;
+
+console.log(
+str
+.split('\n')
+.filter(line => line !='<ul>'&& line !='</ul>')
+.map(tiempo => 
+   tiempo.replace('<li data-time="','')
+    .replace('">Redux Video</li>','')
+    .replace('">Flexbox Video</li>', '')
+
+)
+.forEach(tiempo => {
+    const actual = tiempo.split(':')
+    tpoTotal = 60 * parseInt(actual[0])
+    })
+
+);

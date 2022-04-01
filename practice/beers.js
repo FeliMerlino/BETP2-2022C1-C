@@ -20,9 +20,56 @@ const beers = [
     { name: 'Stolen Fruit', abv: 4.6, label: 'https://s3.amazonaws.com/brewerydbapi/beer/YGT30k/upload_uVCHP7-large.png', type: 'Wheat' },
   ];
 
-function orderBeers(beers){
-  return beers
-    .sort((a,b)=> a.type > b.type ? 1:-1);
-}
+// function orderBeers(beers){
+//   return beers
+//     .sort((a,b)=> a.type > b.type ? 1:-1);
+// }
 
-console.log(orderBeers(beers));
+// console.log(orderBeers(beers));
+
+// 1.- Desarrollar una function (setPrice) que retorne un array que incluya el precio (price) segun el siguiente criterio
+//  *     a) Si el  grado alcoholico es < a 5.0 el price es 300
+//  *     b) Si el grado alcoholico es >= 5.0 el price es 350
+//  *     c) La cerveza 'Purple Iris' esta de oferta y su price es 320
+
+ const setPrice = (beers) =>{
+   console.log(beers);
+   beers.forEach(beer => {
+     if (beer.name === 'Purple Iris') {
+       beer.price = 320;
+
+     }else if (beer.abv < 5.0 ) {
+       beer.price = 300;
+
+     }else{
+        beer.price = 350;
+
+     }
+     
+   });
+   
+}
+setPrice(beers);
+console.log(beers);
+
+// 2.- Desarrolle una función que inserte la propiedad file_name (addFileName) a cada uno de los objetos, esta propiedad debe tener solo
+//  * el nombre del archivo de la propiedad label (upload_xOMnlK-large.png, etc..)
+
+  console.log(
+  beers.map(beer => ({
+    
+      name: beer.name,
+      abv: beer.abv,
+      file_name: beer.label.split('/').pop(),
+      price: beer.price,
+      label: beer.label,
+      type: beer.type
+
+      })
+    
+    ));
+    //3.- Desarrollo una funcion que ordene por price (orderPrice)
+    
+    beers.sort(( BeerA, BeerB ) => BeerA.price - BeerB.price )
+    console.log(beers);
+

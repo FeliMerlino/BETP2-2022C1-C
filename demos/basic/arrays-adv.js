@@ -9,24 +9,92 @@ const inventors = [
   ];
 
   // TODO 1: Función para mostrar por consola en formato tabular
+  function printInventors(inventors){
+     console.log(`Nombre      Apellido      Año`);
+     console.log(`--------------------------------`);
+
+    // inventors.forEach(function(inventor){
+      //  console.log(`${inventor.first}       ${inventor.last}        ${inventor.year}`);
+    // });
+
+     inventors.forEach(inventor => console.log(`${inventor.first.padEnd(12,' ')}${inventor.last.padEnd(12,' ')}${inventor.year}`));
+  }
+   printInventors(inventors);
 
   // TODO 2: Mostrar por consola los inventores nacidos antes del 1800
 
+      function filterInventors(inventors ){
+         printInventors(
+            inventors.filter(inventor => inventor.year < 1800)
+         )
+      };
+
+      filterInventors(inventors);
+
   // TODO 3: Mostrar por consola los inventores cuyo apellido empiece con C
+  function beginWithC(inventors){
+   printInventors(
+      //inventors.filter(inventor => inventor.last[0]=== "C") 
+      inventors.filter(inventor => inventor.last.startsWith("C")) )
+   };
+
+   beginWithC(inventors);
+      
 
   // TODO 4: Mostrar por consola Convertir el apellido en mayusculas
 
+      function mapInventors(inventors){
+         printInventors(
+            inventors.map(inventor => ({
+               first: inventor.first, 
+               last: inventor.last.toUpperCase(),
+               year: inventor.year    
+            }))
+         );
+      }
+         
+      mapInventors(inventors);
+
+
   // TODO 5: Mostrar aplicando 3 y 4
+      console.log(
+      printInventors(
+         inventors
+            .filter(inventor => inventor.last.startsWith("C"))
+            .map(inventor => ({
+               first: inventor.first, 
+               last: inventor.last.toUpperCase(),
+               year: inventor.year    
+            }))
+      ));
 
   // TODO 6: Buscar el inventor Kepler y retornar el objeto
+      console.log(
+            inventors.find(inventor => inventor.last === 'Kepler')
+      );
 
   // TODO 7: Hay algun inventor nacido en 1858
 
+         console.log(
+            inventors.some(inventors => inventors.year === 1858)
+         );
   // TODO 8: Todos los inventores nacieron despues de 1500
 
+            console.log(
+               inventors.every(inventor => inventor.year > 1500) 
+            );
+
   // TODO 9: Mostrar por consola los inventores ordenados ascendetemente por fecha de nacimiento
+         
+         printInventors(
+            inventors.sort((InventorA, InventorB) => InventorA.year > InventorB.year ? 1 : -1)
+         );
 
   // TODO 10: Ordenar los inventores por apellido
+
+         printInventors(
+         inventors.sort((InventorA, InventorB) => InventorA.last > InventorB.last ? 1 : -1)
+         );
 
   // TODO 11: Converir el array al formato:
   /**
@@ -40,5 +108,14 @@ const inventors = [
      * ]
      * 
   */ 
+   console.log(
+      inventors.map(inventor => ({
+         name:{
+               first: inventor.first,
+               last: inventor.last
+            },
+         year: inventor.year
+         }))
+         );
 
   
